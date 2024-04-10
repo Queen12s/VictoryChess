@@ -1,17 +1,6 @@
 ##search and eval too slow gonna rewrite in rust but it was fun ig?
 import chess
 import chess.pgn
-import math
-king_end = [
-    -50,-40,-30,-20,-20,-30,-40,-50,
--30,-20,-10,  0,  0,-10,-20,-30,
--30,-10, 20, 30, 30, 20,-10,-30,
--30,-10, 30, 40, 40, 30,-10,-30,
--30,-10, 30, 40, 40, 30,-10,-30,
--30,-10, 20, 30, 30, 20,-10,-30,
--30,-30,  0,  0,  0,  0,-30,-30,
--50,-30,-30,-30,-30,-30,-30,-50
-]
 queen_tab = [
 -20,-10,-10, -5, -5,-10,-10,-20,
 -10,  0,  0,  0,  0,  0,  0,-10,
@@ -145,9 +134,6 @@ def quis(alpha, beta):
 def alpha_beta(board, depth, alpha, beta, maximizing_player):
     if depth == 0 or board.is_game_over():
         return evaluate(board), None
-
-    legal_moves = list(board.legal_moves)
-
     if maximizing_player:
         max_eval = float('-inf')
         best_move = None
@@ -165,7 +151,7 @@ def alpha_beta(board, depth, alpha, beta, maximizing_player):
     else:
         min_eval = float('inf')
         best_move = None
-        for move in legal_moves:
+        for move in eye_order():
             board.push(move)
             eval_score, _ = alpha_beta(board, depth - 1, alpha, beta, True)
             board.pop()
