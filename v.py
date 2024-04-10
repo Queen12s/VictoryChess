@@ -186,6 +186,8 @@ moves = []
 
 # Loop until the game is over
 while not ne.is_game_over():
+    z = input()
+    ne.push_san(z) ## throw error if san is not valid.
     if ne.turn == chess.WHITE:
         # White's turn to move
         score, best_move = alpha_beta(ne, depth=4, alpha=float('-inf'), beta=float('inf'), maximizing_player=True)
